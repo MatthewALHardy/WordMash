@@ -7,11 +7,12 @@
   <title>Ronnie's Word Puzzle</title>
   <meta name="description" content="Find the two letters that end the first word and start the second word.
 For example in absen(..)rtain the letters ce complete absence and certain">
-  <meta name="author" content="Ronnie Hardy">
+  <meta name="author" content="Matthew Hardy" >
 
   <link rel="stylesheet" href="css/styles.css?v=1.0">
 	<script>
-		var x = 0
+		var x = 0;
+		var y = 12;
 		var json =     [
     {
         "Id":  "1",
@@ -3920,10 +3921,26 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 			var x = Math.floor(Math.random() * 780);		
 			document.getElementById("question").innerHTML = json[x].Question;
 			document.getElementById("answer").style.display = "none";
-			document.getElementById("answer").innerHTML = json[x].Answer;
+			document.getElementById("intro").style.display = "none";
+			document.getElementById("next").style.display = "none";
+			document.getElementById("check").style.display = "block";
+			return x
 		}
-		function showAnswer() {
+		function checkAnswer(x) {
+			var y = document.getElementById("entered-answer").value;
+			var z = json[x].Answer;	
+			if (y == z) {
+				document.getElementById("answer").innerHTML = "Correct";
+			}
+			else {
+				document.getElementById("answer").innerHTML = "Sorry the correct answer is " + z;
+			}
 			document.getElementById("answer").style.display = "block";
+			document.getElementById("next").style.display = "block";
+			document.getElementById("check").style.display = "none";
+
+
+
 	
 		}
   </script>
@@ -3934,12 +3951,13 @@ For example in absen(..)rtain the letters ce complete absence and certain">
   
   
   <form>
-  	<p>Find the two letters that end the first word and start the second word.
+  	<p id="intro">Find the two letters that end the first word and start the second word.
 For example in absen(..)rtain the letters ce complete absence and certain</p>
-<button type="button" onclick="nextQuestion()">Next Question</button>
-<button type="button" onclick="showAnswer()">Show Answer</button>
+<button id="next" type="button" onclick="x=nextQuestion()">Next Question</button>
+<button id="check" type="button" onclick="checkAnswer(x)" style = "display: none;">Check Answer</button>
  
   <p id="question">Click Next Question to start</p>
+  <p><input type="text" id="entered-answer" value="??" size="2" maxlength="2"></p>
  <p id="answer">Click show answer to reveal</p>
   </form>
 </body>
