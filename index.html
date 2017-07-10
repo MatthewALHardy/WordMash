@@ -3920,10 +3920,13 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 		function nextQuestion() {
 			var x = Math.floor(Math.random() * 780);		
 			document.getElementById("question").innerHTML = json[x].Question;
+			document.getElementById("entered-answer").value = "??"
 			document.getElementById("answer").style.display = "none";
 			document.getElementById("intro").style.display = "none";
 			document.getElementById("next").style.display = "none";
 			document.getElementById("check").style.display = "block";
+			document.getElementById("entered-answer").style.display = "block";
+			
 			return x
 		}
 		function checkAnswer(x) {
@@ -3938,27 +3941,31 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 			document.getElementById("answer").style.display = "block";
 			document.getElementById("next").style.display = "block";
 			document.getElementById("check").style.display = "none";
+			document.getElementById("entered-answer").style.display = "none";
 
 
 
 	
 		}
+		function hidestart() {
+			document.getElementById("start").style.display = "none"
+		}
   </script>
 </head>
 
 <body>
-
-  
-  
-  <form>
+	<div id="textarea" style = "height: 200px;">
   	<p id="intro">Find the two letters that end the first word and start the second word.
 For example in absen(..)rtain the letters ce complete absence and certain</p>
-<button id="next" type="button" onclick="x=nextQuestion()">Next Question</button>
-<button id="check" type="button" onclick="checkAnswer(x)" style = "display: none;">Check Answer</button>
- 
-  <p id="question">Click Next Question to start</p>
-  <p><input type="text" id="entered-answer" value="??" size="2" maxlength="2"></p>
- <p id="answer">Click show answer to reveal</p>
+
+  <p id="question"></p>
+  <p><input type="text" id="entered-answer" value="??" size="2" maxlength="2" style = "display: none;"> </p>
+  <p id="answer" style = "display: none;"></p>  
+  </div>
+  <form>
+  <button id="start" type="button" onclick="hidestart(); x=nextQuestion()">Start</button>
+  <button id="next" type="button" onclick="x=nextQuestion()" style = "display: none;">Next Question</button>
+  <button id="check" type="button" onclick="checkAnswer(x)" style = "display: none;">Check Answer</button>
   </form>
 </body>
 </html>
