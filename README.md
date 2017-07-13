@@ -6,12 +6,14 @@ Conflicting answers were checked using the SOWPODS list downloaded from
 https://osdn.net/projects/sfnet_scrabbledict/downloads/Dictionary%20Files/sowpods.txt.gz/
 
 Changes Planned
-1)  Get user to enter answer and check it
-2)  UX update, Intro -> Question -> Anwser -> Question
+1)  Get user to enter answer and check it - done
+2)  UX update, Intro -> Question -> Anwser -> Question - done
 3)  Keep score, totals and streaks
 4)  Reactive styling
 
 Bugs
 1) On Answer Screen, Pressing Enter returns us to intro screen - resolved by hiding the text box on Answer screen
-2) Uppercase answers are marked incorrect
-3) Pressing return should progress the game.
+2) Uppercase answers are marked incorrect - resolved, answers converted to lowercase before checking
+3) Pressing return should progress the game - resolved
+4)	Text input box should have focus when we reach the question page - resolved
+5) Should be able to start typing without deleting the ?? in the input box - resolved

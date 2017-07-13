@@ -13,6 +13,7 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 	<script>
 		var x = 0;
 		var y = 12;
+		var s = "start";
 		var json =     [
     {
         "Id":  "1",
@@ -3926,14 +3927,15 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 			document.getElementById("next").style.display = "none";
 			document.getElementById("check").style.display = "block";
 			document.getElementById("entered-answer").style.display = "block";
-			
-			return x
+			selectAnswer();
+			return x;
 		}
 		function checkAnswer(x) {
 			var y = document.getElementById("entered-answer").value;
+			y = y.toLowerCase();
 			var z = json[x].Answer;	
 			if (y == z) {
-				document.getElementById("answer").innerHTML = "Correct";
+				document.getElementById("answer").innerHTML = z + ": Correct";
 			}
 			else {
 				document.getElementById("answer").innerHTML = "Sorry the correct answer is " + z;
@@ -3947,25 +3949,41 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 
 	
 		}
-		function hidestart() {
-			document.getElementById("start").style.display = "none"
+		function hideStart() {
+			document.getElementById("start").style.display = "none";
 		}
+		function currentButton(k) {
+			if (k == 13) {		
+				document.getElementById(s).click();
+			}
+		}
+		function selectAnswer() {
+				var a = document.getElementById("entered-answer");
+				a.focus();
+				a.setSelectionRange(0, a.value.length);
+		
+		}
+
   </script>
 </head>
 
-<body>
+<body onkeypress="currentButton(event.keyCode)">
+
 	<div id="textarea" style = "height: 200px;">
   	<p id="intro">Find the two letters that end the first word and start the second word.
 For example in absen(..)rtain the letters ce complete absence and certain</p>
 
   <p id="question"></p>
-  <p><input type="text" id="entered-answer" value="??" size="2" maxlength="2" style = "display: none;"> </p>
+
+  <p><input onfocus = "selectAnswer()" type="text" id="entered-answer" value="??" size="2" maxlength="2" style = "display: none;"> </p>
+
   <p id="answer" style = "display: none;"></p>  
   </div>
   <form>
-  <button id="start" type="button" onclick="hidestart(); x=nextQuestion()">Start</button>
-  <button id="next" type="button" onclick="x=nextQuestion()" style = "display: none;">Next Question</button>
-  <button id="check" type="button" onclick="checkAnswer(x)" style = "display: none;">Check Answer</button>
+  <button id="start" type="button" onclick="s = 'check' ; x=nextQuestion(); hideStart()">Start</button>
+  <button id="check" type="button" onclick="s = 'next' ; checkAnswer(x)" style = "display: none;">Check Answer</button>  
+  <button id="next" type="button" onclick="s = 'check' ; x=nextQuestion()" style = "display: none;">Next Question</button>
+
   </form>
 </body>
 </html>
