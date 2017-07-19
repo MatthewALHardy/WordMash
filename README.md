@@ -10,6 +10,8 @@ Changes Planned
 2)  UX update, Intro -> Question -> Anwser -> Question - done
 3)  Keep score, totals and streaks
 4)  Reactive styling
+5)  Clear Scores Button
+6)	 Cycle through questions in order rather than random
 
 Bugs
 1) On Answer Screen, Pressing Enter returns us to intro screen - resolved by hiding the text box on Answer screen

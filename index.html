@@ -13,6 +13,7 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 	<script>
 		var x = 0;
 		var y = 12;
+		var r = 0;
 		var s = "start";
 		var json =     [
     {
@@ -3936,15 +3937,17 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 			var z = json[x].Answer;	
 			if (y == z) {
 				document.getElementById("answer").innerHTML = z + ": Correct";
+				r = 1;
 			}
 			else {
 				document.getElementById("answer").innerHTML = "Sorry the correct answer is " + z;
+				r = 0;
 			}
 			document.getElementById("answer").style.display = "block";
 			document.getElementById("next").style.display = "block";
 			document.getElementById("check").style.display = "none";
 			document.getElementById("entered-answer").style.display = "none";
-
+			return r;
 
 
 	
@@ -3963,7 +3966,92 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 				a.setSelectionRange(0, a.value.length);
 		
 		}
-
+	function createCookie(name,value,days) {
+		 var expires = "";
+		 if (days) {
+			  var date = new Date();
+			  date.setTime(date.getTime() + (days*24*60*60*1000));
+			  expires = "; expires=" + date.toUTCString();
+		 }
+		 document.cookie = name + "=" + value + expires + "; path=/";
+	}
+	
+	function readCookie(name) {
+	    var nameEQ = name + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i=0;i < ca.length;i++) {
+	        var c = ca[i];
+	        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+	        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	    }
+	    return null;
+	}	
+	function setCookie(cname, cvalue, exdays) {
+	    var d = new Date();
+	    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	    var expires = "expires="+ d.toUTCString();
+	    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}	
+	function getCookie(cname) {
+	    var name = cname + "=";
+	    var decodedCookie = decodeURIComponent(document.cookie);
+	    var ca = decodedCookie.split(';');
+	    for(var i = 0; i <ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) == ' ') {
+	            c = c.substring(1);
+	        }
+	        if (c.indexOf(name) == 0) {
+	            return c.substring(name.length, c.length);
+	        }
+	    }
+	    return "";
+	}
+	function updateScores(r) {
+		var c = parseInt(readCookie('correct'));		
+		var t = parseInt(readCookie('total'));
+		var s = parseInt(readCookie('streak'));
+		var l = parseInt(readCookie('longest'));
+		if (isNaN(c)) {c = 0};
+		if (isNaN(t)) {t = 0};
+		if (isNaN(s)) {s = 0};
+		if (isNaN(l)) {l = 0};
+		c = c + r;
+		t = t + 1;
+		if (r == 1) {
+					s = s + 1;
+				} else {
+					s = 0;
+				}				
+				if (s > l) {
+						l = s;					
+				} 	
+		
+		
+ 		createCookie('correct',c,365);		
+		createCookie('total',t,365);
+		createCookie('streak',s,365);
+		createCookie('longest',l,365);
+		document.getElementById("correct").innerHTML = "correct: " + c;
+		document.getElementById("total").innerHTML = "total: " + t;
+		document.getElementById("streak").innerHTML = "current streak: " + s;
+		document.getElementById("longest").innerHTML = "longest streak: " + l;
+	}
+	function initScores() {
+		var c = parseInt(readCookie('correct'));		
+		var t = parseInt(readCookie('total'));
+		var s = parseInt(readCookie('streak'));
+		var l = parseInt(readCookie('longest'));
+		if (isNaN(c)) {c = 0};
+		if (isNaN(t)) {t = 0};
+		if (isNaN(s)) {s = 0};
+		if (isNaN(l)) {l = 0};
+		document.getElementById("correct").innerHTML = "correct: " + c;
+		document.getElementById("total").innerHTML = "total: " + t;
+		document.getElementById("streak").innerHTML = "current streak: " + s;
+		document.getElementById("longest").innerHTML = "longest streak: " + l;
+	}
+	
   </script>
 </head>
 
@@ -3977,13 +4065,15 @@ For example in absen(..)rtain the letters ce complete absence and certain</p>
 
   <p><input onfocus = "selectAnswer()" type="text" id="entered-answer" value="??" size="2" maxlength="2" style = "display: none;"> </p>
 
-  <p id="answer" style = "display: none;"></p>  
+  <p id="answer" style = "display: none;"></p> 
+  <div id="scores"><div id="correct">correct: 0</div><div id="total">total: 0</div><div id="streak">Current Streak: 0</div> <div id="longest">Longest Streak: 0</div> </div> 
   </div>
   <form>
   <button id="start" type="button" onclick="s = 'check' ; x=nextQuestion(); hideStart()">Start</button>
-  <button id="check" type="button" onclick="s = 'next' ; checkAnswer(x)" style = "display: none;">Check Answer</button>  
+  <button id="check" type="button" onclick="s = 'next' ; r=checkAnswer(x); updateScores(r)" style = "display: none;">Check Answer</button>  
   <button id="next" type="button" onclick="s = 'check' ; x=nextQuestion()" style = "display: none;">Next Question</button>
 
   </form>
+  <script>initScores()</script>
 </body>
 </html>
