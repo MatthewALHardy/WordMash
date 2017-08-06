@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Ronnie's Word Puzzle</title>
   <meta name="description" content="Find the two letters that end the first word and start the second word.
@@ -3926,7 +3927,7 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 			document.getElementById("answer").style.display = "none";
 			document.getElementById("intro").style.display = "none";
 			document.getElementById("next").style.display = "none";
-			document.getElementById("check").style.display = "block";
+			document.getElementById("check").style.display = "inline";
 			document.getElementById("entered-answer").style.display = "block";
 			selectAnswer();
 			return x;
@@ -3944,7 +3945,7 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 				r = 0;
 			}
 			document.getElementById("answer").style.display = "block";
-			document.getElementById("next").style.display = "block";
+			document.getElementById("next").style.display = "inline";
 			document.getElementById("check").style.display = "none";
 			document.getElementById("entered-answer").style.display = "none";
 			return r;
@@ -4055,25 +4056,35 @@ For example in absen(..)rtain the letters ce complete absence and certain">
   </script>
 </head>
 
-<body onkeypress="currentButton(event.keyCode)">
-
-	<div id="textarea" style = "height: 200px;">
+<body onkeypress="currentButton(event.keyCode)" class="w3-teal">
+<div id="container" "w3-container w3-mobile w3-teal" >
+	<div id="textarea"   class="w3-twothird w3-container w3-padding w3-mobile" style = "height: 200px;">
   	<p id="intro">Find the two letters that end the first word and start the second word.
 For example in absen(..)rtain the letters ce complete absence and certain</p>
 
   <p id="question"></p>
 
-  <p><input onfocus = "selectAnswer()" type="text" id="entered-answer" value="??" size="2" maxlength="2" style = "display: none;"> </p>
+  <p><input class="	" onfocus = "selectAnswer()" type="text" id="entered-answer" value="??" size="2" maxlength="2" style = "display: none;"> </p>
 
   <p id="answer" style = "display: none;"></p> 
-  <div id="scores"><div id="correct">correct: 0</div><div id="total">total: 0</div><div id="streak">Current Streak: 0</div> <div id="longest">Longest Streak: 0</div> </div> 
+  
   </div>
-  <form>
-  <button id="start" type="button" onclick="s = 'check' ; x=nextQuestion(); hideStart()">Start</button>
-  <button id="check" type="button" onclick="s = 'next' ; r=checkAnswer(x); updateScores(r)" style = "display: none;">Check Answer</button>  
-  <button id="next" type="button" onclick="s = 'check' ; x=nextQuestion()" style = "display: none;">Next Question</button>
+<ul id="scores" class="w3-third w3-container w3-padding w3-mobile w3-ul w3-card-4" >
+<li id="correct" >correct: 0</li>
+<li id="total">total: 0</li>
+<li id="streak">Current Streak: 0</li>
+<li id="longest">Longest Streak: 0</li>
+</ul>
+<div id="buttons" class="w3-third w3-container w3-padding w3-mobile" >
+  <form class="w3-center">
+  <button id="start" class="w3-button w3-khaki w3-round-xxlarge" type="button" onclick="s = 'check' ; x=nextQuestion(); hideStart()">Start</button>
+  <button id="check" class="w3-button w3-khaki w3-round-xxlarge" type="button" onclick="s = 'next' ; r=checkAnswer(x); updateScores(r)" style = "display: none;">Check Answer</button>  
+  <button id="next"  class="w3-button w3-khaki w3-round-xxlarge" type="button" onclick="s = 'check' ; x=nextQuestion()" style = "display: none;">Next Question</button>
 
   </form>
-  <script>initScores()</script>
+</div>
+</div>
+
+<script>initScores()</script>
 </body>
 </html>
