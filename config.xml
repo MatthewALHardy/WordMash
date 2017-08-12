@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+	xmlns:gap   = "http://phonegap.com/ns/1.0"
+	id          = "com.hardytechnologies.wordmash"
+	versionCode = "1"
+	version     = "0.0.1" >
+    
+	<name>Word Mash</name>
+	<description>
+		Find the two letters that end the first word and start the second word. For example in absen(..)rtain the letters ce complete absence and certain
+		All the words used in the answer come from the New General Service List 
+		http://www.newgeneralservicelist.org/s/NGSL-101-by-band-qq9o.xlsx
+		Conflicting answers were checked using the SOWPODS list downloaded from
+		https://osdn.net/projects/sfnet_scrabbledict/downloads/Dictionary%20Files/sowpods.txt.gz/
+	</description>    	
+	<author href="http://www.hardytechnologies.com" email="matt@hardytechnologies.com">
+		Matt and Ronnie Hardy
+	</author>
+	<preference name="permissions"                value="none"/>
+	<icon src="icon.png" />	
+	<access />  
+</widget>
