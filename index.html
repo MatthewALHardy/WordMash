@@ -4052,12 +4052,48 @@ For example in absen(..)rtain the letters ce complete absence and certain">
 		document.getElementById("streak").innerHTML = "current streak: " + s;
 		document.getElementById("longest").innerHTML = "longest streak: " + l;
 	}
+	function showMenu() {
+		let a = document.getElementById("scores").style.display;
+		if (a == "none") {
+			document.getElementById("scores").style.display = "block";		
+			}
+		else {
+			document.getElementById("scores").style.display = "none";
+		}
+		
+	}
+	function clearScores() {
+ 		createCookie('correct',0,365);		
+		createCookie('total',0,365);
+		createCookie('streak',0,365);
+		createCookie('longest',0,365);
+		document.getElementById("correct").innerHTML = "correct: 0";
+		document.getElementById("total").innerHTML = "total: 0";
+		document.getElementById("streak").innerHTML = "current streak: 0";
+		document.getElementById("longest").innerHTML = "longest streak: 0";
+	
+	}
 	
   </script>
 </head>
 
 <body onkeypress="currentButton(event.keyCode)" class="w3-teal">
-<div id="container" "w3-container w3-mobile w3-teal" >
+
+
+<div id="container" class="w3-container w3-mobile w3-teal" >
+<div id="header" class="w3-twothird w3-container w3-mobile w3-teal" >
+<h1>Wordmash</h1> 
+</div>
+<div id="navbar" class="w3-container w3-mobile w3-teal w3-xxxlarge"  style="float:right;">
+<img src="menuBars.png" alt="menu" onclick="showMenu()"></img>
+</div>
+<ul id="scores" class="w3-third w3-container w3-padding w3-mobile w3-ul w3-card-4" style="float:right; display: none" >
+<li id="correct" >correct: 0</li>
+<li id="total">total: 0</li>
+<li id="streak">Current Streak: 0</li>
+<li id="longest">Longest Streak: 0</li>
+<li><button id="clear" class="w3-button w3-khaki w3-round-xxlarge" type="button" onclick="clearScores();showMenu()">Clear</button></li>
+</ul>
 	<div id="textarea"   class="w3-twothird w3-container w3-padding w3-mobile" style = "height: 200px;">
   	<p id="intro">Find the two letters that end the first word and start the second word.
 For example in absen(..)rtain the letters ce complete absence and certain</p>
@@ -4069,13 +4105,8 @@ For example in absen(..)rtain the letters ce complete absence and certain</p>
   <p id="answer" style = "display: none;"></p> 
   
   </div>
-<ul id="scores" class="w3-third w3-container w3-padding w3-mobile w3-ul w3-card-4" >
-<li id="correct" >correct: 0</li>
-<li id="total">total: 0</li>
-<li id="streak">Current Streak: 0</li>
-<li id="longest">Longest Streak: 0</li>
-</ul>
-<div id="buttons" class="w3-third w3-container w3-padding w3-mobile" >
+
+<div id="buttons" class="w3-twothird w3-container w3-padding w3-mobile" >
   <form class="w3-center">
   <button id="start" class="w3-button w3-khaki w3-round-xxlarge" type="button" onclick="s = 'check' ; x=nextQuestion(); hideStart()">Start</button>
   <button id="check" class="w3-button w3-khaki w3-round-xxlarge" type="button" onclick="s = 'next' ; r=checkAnswer(x); updateScores(r)" style = "display: none;">Check Answer</button>  
